@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+option csharp_namespace = "PaymentProcessor.Services";
+
+package tutors;
+
+message CreateTutorCommand {
+  string first_name = 1;
+  string last_name = 2;
+  string email = 3;
+}
+
+message CreateTutorReply {
+  bool success = 1;
+  string error_message = 2;
+  TutorData tutor_data = 3;
+}
+
+message GetAllTutorsRequest {
+  // Empty request - could add pagination later
+}
+
+message GetAllTutorsReply {
+  bool success = 1;
+  string error_message = 2;
+  repeated TutorData tutors = 3;
+}
+
+message TutorData {
+  string id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string email = 4;
+  string status = 5;
+}
+
+service Tutor {
+  rpc CreateTutor(CreateTutorCommand) returns (CreateTutorReply);
+  rpc GetAllTutors(GetAllTutorsRequest) returns (GetAllTutorsReply);
+}
+
